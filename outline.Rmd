@@ -1,0 +1,79 @@
+---
+title: "remake"
+author: "Kirill Müller"
+date: "April 6, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Reproducible and replicable
+    - **Reproducible**: Runs on other people's computers
+    - Replicable: Repeating a study gives similar conclusions
+
+2. Why is running on other people's computers important?
+    - coworkers, collaborators, peer review
+    - validation, verification, replication
+    - different computers for development and analysis
+    - your future self
+
+3. Components of reproducibility
+    - hardware
+    - software: OS version, R version and packages
+    - **data**: directory paths
+    - **workflow**: what to run how and when
+
+4. Describing data and workflow
+    - the simpler the description, the more likely successful
+    - ideally, a single script that runs everything
+      - open data: download/harvest from web
+      - restricted data: operate directly on raw data
+      - avoid "manual cleaning"
+      - model estimation, analysis, ..., final report
+
+5. 
+
+```r
+### 01-delay-data.R ###
+
+library(magrittr)
+library(readr)
+
+setwd("/home/krlmlr/git/R/ODDPredictDelays")
+
+delay_data <- read_delim(
+  "raw/data/delay_data/fahrzeitensollist2016061920160625.csv",
+  delim = ","
+) %>%
+  extract(c("linie", "soll_ab_von", "ist_ab_von"))
+```
+
+```r
+### 01-delay-data.R ###
+
+library(magrittr)
+library(readr)
+
+setwd("/home/krlmlr/git/R/ODDPredictDelays")
+
+delay_data <- read_delim(
+  "raw/data/delay_data/fahrzeitensollist2016061920160625.csv",
+  delim = ","
+) %>%
+  extract(c("linie", "soll_ab_von", "ist_ab_von"))
+```
+
+```r
+### 02-vbz-lines.R ###
+
+library(readr)
+
+setwd("/home/krlmlr/git/R/ODDPredictDelays")
+
+vbz_lines <- read_delim(
+  "raw/data/passenger_counts/LINIE_2014.csv",
+  delim = ","
+)
+```
