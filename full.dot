@@ -1,0 +1,16 @@
+digraph g {
+  rankdir=LR;
+  supermarket [image="images/supermarket-thumb.png", label="", shape=box];
+  raw_meat [image="images/raw-meat-thumb.png", label="", shape=box];
+  chopped_meat [image="images/chopped-meat-thumb.png", label="", shape=box];
+  frying_meat [image="images/frying-meat-thumb.png", label="", shape=box];
+  ragout [image="images/ragout-thumb.png", label="", shape=box];
+  raw_carrots [image="images/raw-carrots-thumb.png", label="", shape=box];
+  peeled_carrots [image="images/peeled-carrots-thumb.png", label="", shape=box];
+  raw_potatoes [image="images/raw-potatoes-thumb.png", label="", shape=box];
+  peeled_potatoes [image="images/peeled-potatoes-thumb.png", label="", shape=box];
+  cooked_potatoes [image="images/cooked-potatoes-thumb.png", label="", shape=box];
+  supermarket -> buy -> raw_meat -> chop -> chopped_meat -> fry -> frying_meat -> combine -> ragout;
+  buy -> raw_carrots -> peel -> peeled_carrots -> combine;
+  buy -> raw_potatoes -> peel -> peeled_potatoes -> cook -> cooked_potatoes -> combine;
+}

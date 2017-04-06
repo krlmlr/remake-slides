@@ -1,0 +1,8 @@
+digraph g {
+  rankdir=LR;
+  raw_meat [image="images/raw-meat-thumb.png", label="", shape=box];
+  chopped_meat [image="images/chopped-meat-thumb.png", label="", shape=box];
+  frying_meat [image="images/frying-meat-thumb.png", label="", shape=box];
+  ragout [image="images/ragout-thumb.png", label="", shape=box];
+  raw_meat -> chop -> chopped_meat -> fry -> frying_meat -> combine -> ragout;
+}

@@ -1,0 +1,7 @@
+digraph g{
+  rankdir=LR;
+  raw_meat [image="images/raw-meat-thumb.png", label="", shape=box];
+  ragout [image="images/ragout-thumb.png", label="", shape=box];
+  prepare [label="chop the meat in small pieces, fry in a pan with hot oil, combine with vegetables"];
+  raw_meat -> prepare -> ragout;
+}
