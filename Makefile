@@ -1,9 +1,9 @@
 all: slides.html
 
-.dots: $(patsubst %.dot,%.png,$(wildcard *.dot))
+.dots: $(patsubst %.dot,%.png,$(wildcard dots/*.dot))
 	touch $@
 
-%.png: %.dot
+dots/%.png: dots/%.dot
 	dot $< -Tpng -o$@
 
 slides.html: slides.Rmd .dots Makefile
