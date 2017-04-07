@@ -4,3 +4,5 @@
 .Ruserdata
 *.html
 /*.png
+/slides_files
+/libs
