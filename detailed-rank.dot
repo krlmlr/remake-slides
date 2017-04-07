@@ -6,4 +6,6 @@ digraph g {
   ragout [image="images/ragout-thumb.png", label="", shape=box];
   combine [label="combine\nwith\nvegetables"];
   raw_meat -> chop -> chopped_meat -> fry -> frying_meat -> combine -> ragout;
+
+  {rank=same frying_meat fry chopped_meat}
 }
