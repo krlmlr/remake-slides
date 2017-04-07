@@ -15,7 +15,7 @@ output:
 options(htmltools.dir.version = FALSE)
 ```
 
-background-image: url(https://imgs.xkcd.com/comics/the_difference.png)
+background-image: url(images/the_difference.png)
 background-position: 20% 100%
 class: right
 # Reproducible
@@ -339,4 +339,14 @@ Slides created via the R package [**xaringan**](https://github.com/yihui/xaringa
 
 ???
 
-- question: different sorts of meat
+---
+
+class: inverse
+
+---
+
+background-image: url(detailed-parallel.png)
+background-size: contain
+class: center, bottom
+
+# Same recipe, different inputs
