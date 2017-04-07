@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Reproducible reseach with</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Kirill Müller" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/viz/viz.js"></script>
+    <link href="libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
+    <script src="libs/grViz-binding/grViz.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Reproducible reseach with <img src="images/R_logo_45.png" />
+### Kirill Müller
+### Zurich R user meetup, 2017-04-10
+
+---
+
+
+
+
+background-image: url(images/the_difference.png)
+background-position: 20% 100%
+class: right
+# Reproducible
+
+### vs.
+
+# Replicable
+
+???
+
+- programming?
+- programming in R?
+- writing a function?
+- installed software
+- compiled software
+- used Make
+- used remake
+
+
+- **Reproducible**: Can obtain same results from same data
+- Replicable: Repeating a study gives similar conclusions
+
+Image credit: [xkcd](https://xkcd.com/242/)
+
+---
+background-image: url(images/the_difference.png)
+background-size: 120%
+background-position: 280% 100%
+
+class: inverse, center, right
+
+# Why?
+
+???
+
+Why is running on other people's computers important?
+
+- coworkers, collaborators, peer review
+- validation, verification, replication
+- different computers for development and analysis
+- your future self
+
+---
+
+background-image: url(dots/intro.png)
+background-size: contain
+background-position: 0% 90%
+
+# Other people's computers
+
+- hardware
+- software: OS version, R version and packages
+    - virtualization
+    - `packrat`
+- data: directory paths
+    - open data
+    - `here`
+- **workflow**: what to do how and when
+
+???
+
+Components of reproducibility
+- hardware
+- software: OS version, R version and packages
+- data: directory paths
+- **workflow**: what to run how and when
+
+---
+background-image: url(dots/linear.png)
+background-position: 50% 50%
+background-size: contain
+class: center, bottom
+
+# A recipe
+
+???
+
+- the simpler the description, the more likely successful
+- ideally, a single script that runs everything
+    - open data: download/harvest from web
+    - restricted data: operate directly on raw data
+    - avoid "manual cleaning"
+    - model estimation, analysis, ..., final report
+
+- complete instructions to prepare the meal
+- works for humans
+- works for computers
+- **does not** work well for
+    - modification
+    - extension
+    - learning
+
+---
+background-image: url(dots/detailed-rank.png)
+background-size: contain
+class: center, bottom
+
+# Splitting the recipe
+
+???
+
+- describe as a set of transformations
+- each step has inputs, outputs, and uses a **transformation rule**
+- the inputs and outputs are called **targets**
+- vegetables?
+
+---
+background-image: url(dots/vegetables.png)
+background-size: contain
+class: center, bottom
+
+# Adding vegetables
+
+???
+
+- Easy to extend or modify
+- Rules can be reused
+
+---
+background-image: url(dots/from-raw.png)
+background-size: contain
+class: center, bottom
+
+# Putting it all together
+
+???
+
+- Outputs can be combined easily
+- Arbitrary complexity
+
+---
+
+background-image: url(dots/full.png)
+background-position: 50% 50%
+background-size: contain
+class: center, bottom
+
+# Dependency graph
+
+???
+
+- where to get food (for a truly reproducible cooking experience)
+- arbitrary complexity if the dependency structure doesn't contain cycles
+
+---
+class: inverse, center, middle
+
+# DAG
+
+???
+
+- define process as a directed acyclic graph
+- rule-based tools
+    - make
+    - remake
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 80%
+# `Makefile`
+
+```Makefile
+all: ragout
+
+ragout: fried_meat
+⇥       combine --with=vegetables fried_meat &gt; ragout
+
+fried_meat: chopped_meat
+⇥       fry --with=oil chopped_meat &gt; fried_meat
+
+chopped_meat: raw_meat
+⇥       chop raw_meat &gt; chopped_meat
+```
+
+???
+
+- describe rules
+- order doesn't matter
+- redundancy
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 80%
+
+# `Makefile` with placeholders
+
+```Makefile
+all: ragout
+
+ragout: fried_meat
+⇥       combine --with=vegetables $&lt; &gt; $@
+
+fried_meat: chopped_meat
+⇥       fry --with=oil $&lt; &gt; $@
+
+chopped_meat: raw_meat
+⇥       chop $&lt; &gt; $@
+```
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 80%
+
+# `Makefile` with ![](images/R_logo_45.png)?
+
+```Makefile
+all: ragout
+
+ragout.rds: fried_meat.rds
+⇥       R -q -e 'library(cooking);
+                 fried_meat &lt;- readRDS("$&lt;");
+                 ragout &lt;- combine(fried_meat, with = vegetables);
+                 saveRDS(ragout, "$@")'
+
+fried_meat.rds: ...
+```
+
+---
+
+background-image: url(dots/detailed.png)
+background-size: contain
+background-position: 0% 90%
+
+# `remake.yml`
+
+```yaml
+packages:
+- cooking
+
+targets:
+  all:
+    depends: ragout
+
+  ragout:
+    command: combine(fried_meat, with = I("vegetables"))
+
+  fried_meat:
+    command: fry(chopped_meat, with = I("oil"))
+
+  chopped_meat:
+    command: chop("raw_meat.csv")
+```
+
+
+---
+
+class: inverse, center, middle
+
+# `remake::make()`
+
+---
+
+# Cooking, finally!
+
+
+
+
+```r
+remake::make()
+## [  LOAD ]
+## [  READ ]              |  # loading sources
+## &lt;  MAKE &gt; all
+## [ BUILD ] chopped_meat |  chopped_meat &lt;- chop("raw_meat.csv")
+## [  READ ]              |  # loading packages
+## [ BUILD ] fried_meat   |  fried_meat &lt;- fry(chopped_meat, with...
+## [ BUILD ] ragout       |  ragout &lt;- combine(fried_meat, with =...
+## [ ----- ] all
+remake::make()
+## &lt;  MAKE &gt; all
+## [    OK ] chopped_meat
+## [    OK ] fried_meat
+## [    OK ] ragout
+## [ ----- ] all
+remake::fetch("ragout")
+## ragout, made of
+##   fried meat, made of
+##     chopped meat, made of
+##       raw_meat.csv
+##     oil
+##   vegetables
+```
+
+---
+
+class: center
+
+# `remake::diagram()`
+
+<div id="htmlwidget-42a1c39845dfcefe1d5f" style="width:504px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-42a1c39845dfcefe1d5f">{"x":{"diagram":"digraph remake { node [ fontname = courier, fontsize = 10 ] \nnode [ shape = circle, color = \"#34495e\", fillcolor = \"#D6DBDF\", style = filled ] \"all\"\nnode [ shape = ellipse, color = \"#3498db\", fillcolor = \"#3498db\", style = filled ] \"ragout\"; \"fried_meat\"; \"chopped_meat\"\nnode [ shape = box, color = \"#1abc9c\", fillcolor = \"#1abc9c\", style = filled ] \"raw_meat.csv\"\n\"ragout\" -> \"all\" [tooltip = \"(dependency only)\"];\n\"fried_meat\" -> \"ragout\" [tooltip = \"combine\"];\n\"chopped_meat\" -> \"fried_meat\" [tooltip = \"fry\"];\n\"raw_meat.csv\" -> \"chopped_meat\" [tooltip = \"chop\"]; }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# `remake.yml`, spice it up!
+
+```yaml
+packages:
+- cooking
+
+targets:
+  all:
+    depends: ragout
+
+  ragout:
+    command: combine(fried_meat, with = I("vegetables"))
+
+  fried_meat:
+*    command: fry(chopped_meat, with = I(c("oil", "pepper")))
+
+  chopped_meat:
+    command: chop("raw_meat.csv")
+```
+
+---
+
+# Peppered meat
+
+
+```r
+remake::make(remake_file = "remake-spices.yml")
+## [  LOAD ]
+## [  READ ]              |  # loading sources
+## &lt;  MAKE &gt; all
+## [    OK ] chopped_meat
+## [ BUILD ] fried_meat   |  fried_meat &lt;- fry(chopped_meat, with...
+## [  READ ]              |  # loading packages
+## [ BUILD ] ragout       |  ragout &lt;- combine(fried_meat, with =...
+## [ ----- ] all
+remake::fetch("ragout")
+## ragout, made of
+##   fried meat, made of
+##     chopped meat, made of
+##       raw_meat.csv
+##     oil   
+##     pepper
+##   vegetables
+```
+
+---
+
+class: inverse, center, middle
+
+# Running your analysis on other people's computers enables reproducible research.
+
+# &amp;nbsp;
+
+# Describe your analysis as a set of&lt;br/&gt;**data transformations**&lt;br/&gt;to make it easy to run &lt;br/&gt;for you and for others.
+
+---
+
+class: center, middle
+
+# Thanks!
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
+???
+
+---
+
+class: inverse
+
+---
+
+background-image: url(dots/detailed-parallel.png)
+background-size: contain
+class: center, bottom
+
+# Same recipe, different inputs
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

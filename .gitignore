@@ -2,7 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-*.html
 /slides_files
 /docs/libs
 /.dots
