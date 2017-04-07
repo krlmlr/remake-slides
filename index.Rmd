@@ -69,10 +69,10 @@ background-position: 0% 90%
 - hardware
 - software: OS version, R version and packages
     - virtualization
-    - `packrat`
+    - [`packrat`](https://rstudio.github.io/packrat/)
 - data: directory paths
     - open data
-    - `here`
+    - [`here`](https://github.com/krlmlr/here)
 - **workflow**: what to do how and when
 
 ???
@@ -82,6 +82,12 @@ Components of reproducibility
 - software: OS version, R version and packages
 - data: directory paths
 - **workflow**: what to run how and when
+
+
+Describe the process with a simple example:
+Cooking a ragout from a piece of raw meat.
+
+Vegetarians, please think of a substitute for the meat.
 
 ---
 background-image: url(dots/linear.png)
@@ -169,8 +175,9 @@ class: inverse, center, middle
 
 - define process as a directed acyclic graph
 - rule-based tools
-    - make
-    - remake
+    - [GNU make](https://www.gnu.org/software/make/manual/make.html)
+    - [remake](https://github.com/richfitz/remake#readme)
+    - [drake](https://github.com/wlandau-lilly/drake#readme)
 ---
 
 background-image: url(dots/detailed.png)
@@ -331,11 +338,19 @@ class: inverse, center, middle
 
 ---
 
+background-image: url(https://avatars1.githubusercontent.com/u/1741643?v=3&s=460)
+background-size: 20%
+background-position: 0% 100%
+
 class: center, middle
 
 # Thanks!
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
+# https://goo.gl/aC9dbl
+
+### https://github.com/krlmlr, @krlmlr
 
 ???
 
