@@ -4,6 +4,6 @@
 .Ruserdata
 *.html
 /slides_files
-/libs
+/docs/libs
 /.dots
 /.remake

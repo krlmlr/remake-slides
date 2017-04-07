@@ -1,10 +1,13 @@
-all: slides.html
+all: docs/slides.html
 
 .dots: $(patsubst %.dot,%.png,$(wildcard dots/*.dot))
 	touch $@
 
-dots/%.png: dots/%.dot
+dots/%.png: docs/dots/%.png
+	ln -sf $(PWD)/$< $@
+
+docs/dots/%.png: dots/%.dot
 	dot $< -Tpng -o$@
 
-slides.html: slides.Rmd .dots Makefile
-	R -q -e 'rmarkdown::render("$<")'
+docs/slides.html: slides.Rmd .dots Makefile
+	R -q -e 'rmarkdown::render("$<", output_dir = "docs")'

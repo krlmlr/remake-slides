@@ -4,7 +4,7 @@ author: "Kirill Müller"
 date: "Zurich R user meetup, 2017-04-10"
 output:
   xaringan::moon_reader:
-    lib_dir: libs
+    lib_dir: docs/libs
     nature:
       highlightStyle: github
       highlightLines: true
@@ -41,7 +41,7 @@ class: right
 Image credit: [xkcd](https://xkcd.com/242/)
 
 ---
-background-image: url(https://imgs.xkcd.com/comics/the_difference.png)
+background-image: url(images/the_difference.png)
 background-size: 120%
 background-position: 280% 100%
 
@@ -60,7 +60,7 @@ Why is running on other people's computers important?
 
 ---
 
-background-image: url(intro.png)
+background-image: url(dots/intro.png)
 background-size: contain
 background-position: 0% 90%
 
@@ -84,7 +84,7 @@ Components of reproducibility
 - **workflow**: what to run how and when
 
 ---
-background-image: url(linear.png)
+background-image: url(dots/linear.png)
 background-position: 50% 50%
 background-size: contain
 class: center, bottom
@@ -109,7 +109,7 @@ class: center, bottom
     - learning
 
 ---
-background-image: url(detailed-rank.png)
+background-image: url(dots/detailed-rank.png)
 background-size: contain
 class: center, bottom
 
@@ -123,7 +123,7 @@ class: center, bottom
 - vegetables?
 
 ---
-background-image: url(vegetables.png)
+background-image: url(dots/vegetables.png)
 background-size: contain
 class: center, bottom
 
@@ -135,7 +135,7 @@ class: center, bottom
 - Rules can be reused
 
 ---
-background-image: url(from-raw.png)
+background-image: url(dots/from-raw.png)
 background-size: contain
 class: center, bottom
 
@@ -148,7 +148,7 @@ class: center, bottom
 
 ---
 
-background-image: url(full.png)
+background-image: url(dots/full.png)
 background-position: 50% 50%
 background-size: contain
 class: center, bottom
@@ -173,7 +173,7 @@ class: inverse, center, middle
     - remake
 ---
 
-background-image: url(detailed.png)
+background-image: url(dots/detailed.png)
 background-size: contain
 background-position: 0% 80%
 # `Makefile`
@@ -199,7 +199,7 @@ chopped_meat: raw_meat
 
 ---
 
-background-image: url(detailed.png)
+background-image: url(dots/detailed.png)
 background-size: contain
 background-position: 0% 80%
 
@@ -220,7 +220,7 @@ chopped_meat: raw_meat
 
 ---
 
-background-image: url(detailed.png)
+background-image: url(dots/detailed.png)
 background-size: contain
 background-position: 0% 80%
 
@@ -240,7 +240,7 @@ fried_meat.rds: ...
 
 ---
 
-background-image: url(detailed.png)
+background-image: url(dots/detailed.png)
 background-size: contain
 background-position: 0% 90%
 
@@ -345,7 +345,7 @@ class: inverse
 
 ---
 
-background-image: url(detailed-parallel.png)
+background-image: url(dots/detailed-parallel.png)
 background-size: contain
 class: center, bottom
 
