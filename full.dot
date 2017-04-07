@@ -1,6 +1,7 @@
 digraph g {
   rankdir=LR;
   supermarket [image="images/supermarket-thumb.png", label="", shape=box];
+  buy [label="buy\nfrom"];
   raw_meat [image="images/raw-meat-thumb.png", label="", shape=box];
   chopped_meat [image="images/chopped-meat-thumb.png", label="", shape=box];
   frying_meat [image="images/frying-meat-thumb.png", label="", shape=box];
