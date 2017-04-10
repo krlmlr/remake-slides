@@ -1,5 +1,5 @@
 ---
-title: "Reproducible reseach with ![](images/R_logo_45.png)"
+title: "Reproducible workflows with ![](images/R_logo_45.png)"
 author: "Kirill Müller"
 date: "Zurich R user meetup, 2017-04-10"
 output:
@@ -26,14 +26,21 @@ class: right
 
 ???
 
-- programming?
-- programming in R?
-- writing a function?
-- installed software
-- compiled software
-- used Make
-- used remake
+Thank you.  First of all, I'd like to do a small survey, to make sure we're on the same page.  Who has already been
 
+- programmed?
+- programmed in R?
+- written a function in R?
+- installed software?
+- compiled software?
+- used Make?
+- used remake?
+
+Great!  This presentation focuses on the last two points,
+I hope this presentation will be useful to you.
+
+I'd like to start with definitions.  What is a "reproducible workflow"?
+In the context of research, we must differentiate between "reproducible" and "replicable".
 
 - **Reproducible**: Can obtain same results from same data
 - Replicable: Repeating a study gives similar conclusions
@@ -85,9 +92,34 @@ Components of reproducibility
 
 
 Describe the process with a simple example:
+preparing a report that contains modeling results obtained from raw data.
+
 Cooking a ragout from a piece of raw meat.
 
 Vegetarians, please think of a substitute for the meat.
+
+---
+background-image: url(images/manuals.png)
+background-position: 50% 50%
+background-size: contain
+class: center, inverse
+
+# Manuals
+
+???
+
+- the simpler the description, the more likely successful
+    - open data: download/harvest from web
+    - restricted data: operate directly on raw data
+    - cleanup scripts, avoid "manual cleaning"
+    - model estimation, analysis, ..., final report
+
+This is what XKCD has to say about manuals.
+
+- ideally, a single script that runs everything
+    - of course, you're doing this already
+
+- unstructured description?
 
 ---
 background-image: url(dots/linear.png)
@@ -98,13 +130,6 @@ class: center, bottom
 # A recipe
 
 ???
-
-- the simpler the description, the more likely successful
-- ideally, a single script that runs everything
-    - open data: download/harvest from web
-    - restricted data: operate directly on raw data
-    - avoid "manual cleaning"
-    - model estimation, analysis, ..., final report
 
 - complete instructions to prepare the meal
 - works for humans
