@@ -1,7 +1,7 @@
 ---
 title: "Reproducible workflows with ![](images/R_logo_45.png)"
 author: "Kirill Müller"
-date: "Zurich R user meetup, 2017-04-10"
+date: "Tel Aviv, 2017-09-11"
 output:
   xaringan::moon_reader:
     lib_dir: docs/libs
